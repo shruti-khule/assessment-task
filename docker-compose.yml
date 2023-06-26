@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  silberfluss_assessment_backend:
+    container_name: silberfluss_assessment_backend
+    init: true
+    build:
+      context: .
+      dockerfile: ./DockerfileBackend
+    volumes:
+      - ./flask:/app/flask
+    ports:
+      - 1337:1337
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+  silberfluss_assessment_frontend:
+    container_name: silberfluss_assessment_frontend
+    init: true
+    build:
+      context: .
+      dockerfile: ./DockerfileFrontend
+    ports:
+      - 4200:4200
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always

@@ -1,0 +1,37 @@
+<div class="message-content" *ngIf="message">
+  <p [innerHTML]="message.content?.value"></p>
+</div>
+<div class="response" *ngIf="message?.responseRequest && last">
+  <form class = "tp-form">
+    <div *ngIf="!isSignNode">
+      <mat-form-field class = "tp-full-width">
+        <input type = "text" 
+           placeholder = "Answer" 
+           (keydown)="loadStates()"
+           matInput 
+           [formControl] = "control" 
+           [matAutocomplete] = "auto"
+           required>
+        <mat-autocomplete #auto = "matAutocomplete">
+           <mat-option [value] = "state" *ngFor = "let state of states">
+              {{state}}
+             <button mat-raised-button color="primary" (click)="deleteAnswer(state)">
+               <span>delete</span>
+             </button>
+           </mat-option>
+        </mat-autocomplete>
+     </mat-form-field>
+    </div>
+    <div *ngIf="isSignNode"><hello name="{{ name }}"></hello></div>
+  </form>
+  
+  <button *ngIf="!isSignNode" mat-raised-button color="primary" (click)="sendAnswer()">
+    <mat-icon>send</mat-icon>
+    <span>Send</span>
+  </button>
+  <button *ngIf="isSignNode" mat-raised-button color="primary" (click)="sendSign()">
+    <mat-icon>send</mat-icon>
+    <span>Send</span>
+  </button>
+</div>
+

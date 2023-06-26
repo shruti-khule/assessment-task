@@ -1,0 +1,15 @@
+# Base image for the Flask application
+FROM python:3.10.8-bullseye AS flask
+
+# Set the working directory for the Flask application
+WORKDIR /app/flask
+
+# Copy the Flask project files to the container
+COPY flask/ .
+
+# Install Flask project dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENTRYPOINT ["python3"]
+
+CMD ["app.py"]
